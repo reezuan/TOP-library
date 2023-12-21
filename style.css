@@ -1,0 +1,62 @@
+/* ---------------------------- GLOBAL ----------------------------- */
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* ---------------------------- HEADER ----------------------------- */
+
+header {
+    background-color: #A7C7E7;
+    color: #000000;
+    padding: 10px 50px;
+    box-shadow: 0px 0px 2px 4px #bcbcba;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo h1 {
+    width: 18ch;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
+
+/* ---------------------------- FOOTER ----------------------------- */
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer img {
+    width: 30px;
+    height: auto;
+}
