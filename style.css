@@ -1,5 +1,7 @@
 /* ---------------------------- GLOBAL ----------------------------- */
 
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -9,14 +11,15 @@
 body {
     margin: 0;
     font-size: 16px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* ---------------------------- HEADER ----------------------------- */
 
 header {
-    background-color: #A7C7E7;
+    background-color: #CfCfC4;
     color: #000000;
-    padding: 10px 50px;
+    padding: 20px 50px;
     box-shadow: 0px 0px 2px 4px #bcbcba;
 
     display: flex;
@@ -31,6 +34,10 @@ header {
 
 .logo h1 {
     width: 18ch;
+    font-family: "Julius Sans One", Montserrat, Helvetica, sans-serif;
+    font-size: 2.3rem;
+    line-height: 1.15;
+    margin: 0;
 }
 
 .logo img {
@@ -38,18 +45,49 @@ header {
     height: auto;
 }
 
+/* ----------------------------- MAIN ------------------------------ */
+
+main {
+    margin: 50px 0 0 0;
+    padding: 0 400px;
+}
+
+h2 {
+    text-align: center;
+    margin: 50px 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 50px;
+}
+
+.card {
+    background-color: #f5f5f3;
+    box-shadow: 3px 4px 3px 0px #bcbcba;
+    border-radius: 20px;
+    padding: 20px 0 30px 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* ---------------------------- FOOTER ----------------------------- */
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0;
     right: 0;
+    margin-right: 30px;
 
     display: flex;
     justify-content: center;
     align-items: baseline;
-    gap: 10px;
+    gap: 8px;
 }
 
 footer a {
