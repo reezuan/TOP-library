@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The National Library of Ket</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -16,10 +16,10 @@
         <div></div>
     </header>
     <main>
-        <div>
-            <!-- Add select dropdown for filter & sort here -->
+        <div class="library-header">
+            <div><!-- Add select dropdown for filter & sort here --></div>
             <h2>Books you've read</h2>
-            <button class="add-book"></button>
+            <button data-modal-target="#add-book-modal" class="add-book">Add a book</button>
         </div>
         <div class="library">
             <div class="card">
@@ -36,140 +36,23 @@
                 <button>Read</button>
                 <button>Remove</button>
             </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
-            </div>
-            <div class="card">
-                <h3>The Hobbit</h3>
-                <h4>Bilbo Teabaggins</h4>
-                <p>69 pages</p>
-                <button>Read</button>
-                <button>Remove</button>
+        </div>
+        <div class="modal" id="add-book-modal">
+            <div class="modal-title">Add new book</div>
+            <div class="modal-body">
+                <form class="add-book-form">
+                    <input type="text" id="book-title" name="book-title" placeholder="Title" required />
+                    <input type="text" id="book-author" name="book-author" placeholder="Author" required />
+                    <input type="number" id="book-pages" name="book-pages" placeholder="No. of pages" min="1" required />
+                    <div class="has-read-field">
+                        <label for="has-read">Have you read this book?</label>
+                        <input type="checkbox" id="has-read" name="has-read" value="true" />
+                    </div>
+                    <button type="button">Add book</button>
+                </form>
             </div>
         </div>
+        <div id="overlay"></div>
     </main>
     <footer>
         <p>Made by <a href="https://github.com/reezuan" target="_blank" rel="noopener noreferrer">reezuan</a></p>

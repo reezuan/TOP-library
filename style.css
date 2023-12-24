@@ -14,6 +14,17 @@ body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
+button {
+    cursor: pointer;
+    background-color: #333303;
+    color: white;
+    padding: 13px 30px;
+    border: 0;
+    border-radius: 20px;
+    font-size: 1.01rem;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;;
+}
+
 /* ---------------------------- HEADER ----------------------------- */
 
 header {
@@ -52,11 +63,22 @@ main {
     padding: 0 400px;
 }
 
-h2 {
+.library-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.library-header h2 {
     text-align: center;
     margin: 50px 0;
     font-size: 2rem;
     font-weight: 400;
+    justify-self: center;
+}
+
+.library-header button {
+    justify-self: right;
 }
 
 .library {
@@ -69,11 +91,94 @@ h2 {
     background-color: #f5f5f3;
     box-shadow: 3px 4px 3px 0px #bcbcba;
     border-radius: 20px;
-    padding: 20px 0 30px 0;
+    padding: 25px 30px;
     
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.card button {
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: whitesmoke;
+    width: 300px;
+    max-width: 80%;
+    padding: 20px 25px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+}
+
+.modal-body {
+    width: 100%;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal input {
+    border: none;
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+.has-read-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+.modal button {
+    border-radius: 10px;
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 /* ---------------------------- FOOTER ----------------------------- */
