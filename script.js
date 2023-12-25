@@ -45,7 +45,9 @@ addBookForm.addEventListener("submit", (event) => {
 
     clearLibrary();
     populateLibrary();
+    
     initReadStatusButtons();
+    initRemoveButtons();
 });
 
 addBookButtons.forEach(button => {
@@ -77,15 +79,10 @@ function populateLibrary() {
             <h4>${book.author}</h4>
             <p>${book.pages} pages</p>
             <button class="read-status ${book.hasRead === true ? 'read' : 'not-read'}" data-book-id="${book.id}">${book.hasRead === true ? 'Read' : 'Not read'}</button>
-            <button>Remove</button>`
+            <button class="remove-book" data-book-id="${book.id}">Remove</button>`
 
         library.appendChild(card);
     });
-}
-
-function addBookToLibrary(title, author, pages, hasRead) {
-    const book = new Book(title, author, +pages, hasRead);
-    bookLibrary.push(book);
 }
 
 function initReadStatusButtons() {
@@ -94,7 +91,7 @@ function initReadStatusButtons() {
     readStatusButtons.forEach(button => {
         button.addEventListener("click", (event) => {
             const btn = event.target;
-            let book = bookLibrary.find(item => item.id == Number(btn.getAttribute("data-book-id")));
+            const book = bookLibrary.find(item => item.id == Number(btn.getAttribute("data-book-id")));
             
             if (btn.classList.contains("read") == true) {
                 btn.textContent = "Not read";
@@ -109,6 +106,45 @@ function initReadStatusButtons() {
             book.changeReadStatus();
             console.log(book);
         });
+    });
+}
+
+function initRemoveButtons() {
+    const removeButtons = document.querySelectorAll(".remove-book");
+
+    removeButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const btn = event.target;
+            const book = bookLibrary.find(item => item.id == Number(btn.getAttribute("data-book-id")));
+
+            removeBookFromLibrary(book.id);
+
+            console.log(bookLibrary);
+        });
+    });
+}
+
+function addBookToLibrary(title, author, pages, hasRead) {
+    const book = new Book(title, author, +pages, hasRead);
+    bookLibrary.push(book);
+}
+
+function removeBookFromLibrary(bookId) {
+    const book = bookLibrary.find(item => item.id == bookId);
+    
+    bookLibrary.splice(book.id - 1, 1);
+    
+    clearLibrary();
+    updateBooks();
+    populateLibrary();
+    
+    initReadStatusButtons();
+    initRemoveButtons();
+}
+
+function updateBooks() {
+    bookLibrary.forEach(book => {
+        book.id = bookLibrary.indexOf(book) + 1;
     });
 }
 
