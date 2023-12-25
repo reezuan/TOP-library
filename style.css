@@ -22,7 +22,8 @@ button {
     border: 0;
     border-radius: 20px;
     font-size: 1.01rem;
-    font-family: Montserrat, Helvetica, Arial, sans-serif;;
+    font-family: Montserrat, Helvetica, Arial, sans-serif;
+    font-weight: 500;
 }
 
 /* ---------------------------- HEADER ----------------------------- */
@@ -101,6 +102,15 @@ main {
 
 .card button {
     width: 100%;
+}
+
+.read {
+    color: #333303;
+    background-color: #77DD77;
+}
+
+.not-read {
+    background-color: #FF6961;
 }
 
 .modal {

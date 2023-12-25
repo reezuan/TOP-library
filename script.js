@@ -1,9 +1,9 @@
-const library = [];
+const bookLibrary = [];
 
 // ---------- BOOK CONSTRUCTOR ----------------------------------------
 
 function Book(title, author, pages, hasRead) {
-    this.id = library.length + 1;
+    this.id = bookLibrary.length + 1;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -41,6 +41,9 @@ addBookForm.addEventListener("submit", (event) => {
     addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, hasReadBook.checked);
     closeModal(addBookForm.closest(".modal"));
     addBookForm.reset();
+
+    clearLibrary();
+    populateLibrary();
 });
 
 function openModal(modal) {
@@ -63,10 +66,53 @@ function closeModal(modal) {
 
 // ---------- LIBRARY-RELATED FUNCTIONS -------------------------------
 
+function clearLibrary() {
+    const cards = document.querySelectorAll(".card");
+    
+    cards.forEach(card => {
+        card.remove();
+    });
+}
+
+function populateLibrary() {
+    bookLibrary.forEach(book => {
+        const library = document.querySelector(".library");
+
+        const card = document.createElement("div");
+        card.classList.add("card");
+        
+        const bookTitle = document.createElement("h3");
+        const bookAuthor = document.createElement("h4");
+        const bookPages = document.createElement("p");
+        const hasReadButton = document.createElement("button");
+        const removeButton = document.createElement("button");
+
+        bookTitle.textContent = book.title;
+        bookAuthor.textContent = book.author;
+        bookPages.textContent = `${book.pages} pages`;
+        removeButton.textContent = "Remove";
+
+        if (book.hasRead === true) {
+            hasReadButton.textContent = "Read";
+            hasReadButton.classList.add("read");
+        } else {
+            hasReadButton.textContent = "Not read";
+            hasReadButton.classList.add("not-read");
+        }
+
+        card.appendChild(bookTitle);
+        card.appendChild(bookAuthor);
+        card.appendChild(bookPages);
+        card.appendChild(hasReadButton);
+        card.appendChild(removeButton);
+
+        library.appendChild(card);
+    });
+}
+
 function addBookToLibrary(title, author, pages, hasRead) {
     const book = new Book(title, author, +pages, hasRead);
-    library.push(book);
-    console.log(library);
+    bookLibrary.push(book);
 }
 
 // ---------- FORM-RELATED FUNCTIONS ----------------------------------
