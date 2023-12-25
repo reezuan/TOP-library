@@ -10,18 +10,19 @@ function Book(title, author, pages, hasRead) {
     this.hasRead = hasRead;
 }
 
+Book.prototype.changeReadStatus = function() {
+    if (this.hasRead === true) {
+        this.hasRead = false;
+    } else if (this.hasRead === false) {
+        this.hasRead = true;
+    }
+}
+
 // --------------------------------------------------------------------
 
 const overlay = document.querySelector("#overlay");
 const addBookForm = document.querySelector("#add-book-form");
 const addBookButtons = document.querySelectorAll("[data-modal-target]");
-
-addBookButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const modal = document.querySelector(button.dataset.modalTarget);
-        openModal(modal);
-    });
-});
 
 overlay.addEventListener("click", () => {
     const modals = document.querySelectorAll(".modal.active");
@@ -44,7 +45,74 @@ addBookForm.addEventListener("submit", (event) => {
 
     clearLibrary();
     populateLibrary();
+    initReadStatusButtons();
 });
+
+addBookButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+    });
+});
+
+// ---------- LIBRARY-RELATED FUNCTIONS -------------------------------
+
+function clearLibrary() {
+    const cards = document.querySelectorAll(".card");
+    
+    cards.forEach(card => {
+        card.remove();
+    });
+}
+
+function populateLibrary() {
+    bookLibrary.forEach(book => {
+        const library = document.querySelector(".library");
+
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+            <h3>${book.title}</h3>
+            <h4>${book.author}</h4>
+            <p>${book.pages} pages</p>
+            <button class="read-status ${book.hasRead === true ? 'read' : 'not-read'}" data-book-id="${book.id}">${book.hasRead === true ? 'Read' : 'Not read'}</button>
+            <button>Remove</button>`
+
+        library.appendChild(card);
+    });
+}
+
+function addBookToLibrary(title, author, pages, hasRead) {
+    const book = new Book(title, author, +pages, hasRead);
+    bookLibrary.push(book);
+}
+
+function initReadStatusButtons() {
+    const readStatusButtons = document.querySelectorAll(".read-status");
+
+    readStatusButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const btn = event.target;
+            let book = bookLibrary.find(item => item.id == Number(btn.getAttribute("data-book-id")));
+            
+            if (btn.classList.contains("read") == true) {
+                btn.textContent = "Not read";
+                btn.classList.add("not-read");
+                btn.classList.remove("read");
+            } else if (btn.classList.contains("not-read") == true) {
+                btn.textContent = "Read";
+                btn.classList.add("read");
+                btn.classList.remove("not-read");
+            }
+
+            book.changeReadStatus();
+            console.log(book);
+        });
+    });
+}
+
+// ---------- FORM-RELATED FUNCTIONS ----------------------------------
 
 function openModal(modal) {
     if (modal == null) {
@@ -63,60 +131,3 @@ function closeModal(modal) {
         overlay.classList.remove("active");
     }
 }
-
-// ---------- LIBRARY-RELATED FUNCTIONS -------------------------------
-
-function clearLibrary() {
-    const cards = document.querySelectorAll(".card");
-    
-    cards.forEach(card => {
-        card.remove();
-    });
-}
-
-function populateLibrary() {
-    bookLibrary.forEach(book => {
-        const library = document.querySelector(".library");
-
-        const card = document.createElement("div");
-        card.classList.add("card");
-        
-        const bookTitle = document.createElement("h3");
-        const bookAuthor = document.createElement("h4");
-        const bookPages = document.createElement("p");
-        const hasReadButton = document.createElement("button");
-        const removeButton = document.createElement("button");
-
-        bookTitle.textContent = book.title;
-        bookAuthor.textContent = book.author;
-        bookPages.textContent = `${book.pages} pages`;
-        removeButton.textContent = "Remove";
-
-        if (book.hasRead === true) {
-            hasReadButton.textContent = "Read";
-            hasReadButton.classList.add("read");
-        } else {
-            hasReadButton.textContent = "Not read";
-            hasReadButton.classList.add("not-read");
-        }
-
-        card.appendChild(bookTitle);
-        card.appendChild(bookAuthor);
-        card.appendChild(bookPages);
-        card.appendChild(hasReadButton);
-        card.appendChild(removeButton);
-
-        library.appendChild(card);
-    });
-}
-
-function addBookToLibrary(title, author, pages, hasRead) {
-    const book = new Book(title, author, +pages, hasRead);
-    bookLibrary.push(book);
-}
-
-// ---------- FORM-RELATED FUNCTIONS ----------------------------------
-
-// Modal has to go away
-// Form has to be reset
-
