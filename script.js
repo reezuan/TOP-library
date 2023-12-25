@@ -1,33 +1,47 @@
-const ketLibrary = [];
+const library = [];
 
-function Book(title, author, pages) {
+// ---------- BOOK CONSTRUCTOR ----------------------------------------
+
+function Book(title, author, pages, hasRead) {
+    this.id = library.length + 1;
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.hasRead = hasRead;
 }
 
-function addBookToLibrary(book) {
-    
-}
+// --------------------------------------------------------------------
 
-function initialise() {
-    const addBookButtons = document.querySelectorAll("[data-modal-target]");
-    const overlay = document.querySelector("#overlay");
+const overlay = document.querySelector("#overlay");
+const addBookForm = document.querySelector("#add-book-form");
+const addBookButtons = document.querySelectorAll("[data-modal-target]");
 
-    addBookButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            openModal(modal);
-        });
+addBookButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
     });
+});
 
-    overlay.addEventListener("click", () => {
-        const modals = document.querySelectorAll(".modal.active");
-        modals.forEach(modal => {
-            closeModal(modal);
-        });
+overlay.addEventListener("click", () => {
+    const modals = document.querySelectorAll(".modal.active");
+    modals.forEach(modal => {
+        closeModal(modal);
     });
-}
+});
+
+addBookForm.addEventListener("submit", (event) => {
+    let bookTitle = document.querySelector("#book-title");
+    let bookAuthor = document.querySelector("#book-author");
+    let bookPages = document.querySelector("#book-pages");
+    let hasReadBook = document.querySelector("#has-read");
+
+    event.preventDefault();
+
+    addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, hasReadBook.checked);
+    closeModal(addBookForm.closest(".modal"));
+    addBookForm.reset();
+});
 
 function openModal(modal) {
     if (modal == null) {
@@ -47,4 +61,16 @@ function closeModal(modal) {
     }
 }
 
-initialise();
+// ---------- LIBRARY-RELATED FUNCTIONS -------------------------------
+
+function addBookToLibrary(title, author, pages, hasRead) {
+    const book = new Book(title, author, +pages, hasRead);
+    library.push(book);
+    console.log(library);
+}
+
+// ---------- FORM-RELATED FUNCTIONS ----------------------------------
+
+// Modal has to go away
+// Form has to be reset
+

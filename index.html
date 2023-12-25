@@ -40,15 +40,15 @@
         <div class="modal" id="add-book-modal">
             <div class="modal-title">Add new book</div>
             <div class="modal-body">
-                <form class="add-book-form">
+                <form id="add-book-form" action="">
                     <input type="text" id="book-title" name="book-title" placeholder="Title" required />
                     <input type="text" id="book-author" name="book-author" placeholder="Author" required />
                     <input type="number" id="book-pages" name="book-pages" placeholder="No. of pages" min="1" required />
                     <div class="has-read-field">
                         <label for="has-read">Have you read this book?</label>
-                        <input type="checkbox" id="has-read" name="has-read" value="true" />
+                        <input type="checkbox" id="has-read" name="has-read" value="has-read" />
                     </div>
-                    <button type="button">Add book</button>
+                    <button type="submit">Add book</button>
                 </form>
             </div>
         </div>
