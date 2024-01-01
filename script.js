@@ -130,9 +130,7 @@ function addBookToLibrary(title, author, pages, hasRead) {
 }
 
 function removeBookFromLibrary(bookId) {
-    const book = bookLibrary.find(item => item.id == bookId);
-    
-    bookLibrary.splice(book.id - 1, 1);
+    bookLibrary.splice(bookId - 1, 1);
     
     clearLibrary();
     updateBooks();
